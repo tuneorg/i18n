@@ -18,7 +18,7 @@ export class Localization extends Collection<LangID, DefaultLang> {
         }
     }
 
-    public get lang(): DefaultLang {
-        return this.get(this.langID) ?? this.default;
+    public loc(language = this.langID): DefaultLang {
+        return this.get(language) ?? this.default;
     }
 }
