@@ -1,6 +1,7 @@
 import Collection from "@discordjs/collection";
 import { readdir } from "fs/promises";
-import { resolve } from "path";
+import { dirname, resolve } from "path";
+import { fileURLToPath } from "url";
 import enUS from "./localization/en-US.js";
 
 export type DefaultLang = typeof enUS;
@@ -10,7 +11,7 @@ export class Localization extends Collection<LangID, DefaultLang> {
     public constructor(public langID: LangID) { super(); }
 
     public async load(): Promise<any> {
-        const langsFolderPath = resolve(__dirname, "..", "langs");
+        const langsFolderPath = resolve(dirname(fileURLToPath(import.meta.url)), "..", "langs");
         const langsFile = await readdir(langsFolderPath);
         for (const langFile of langsFile) {
             const lang: DefaultLang = await import(resolve(langsFolderPath, langFile));
