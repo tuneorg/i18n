@@ -1,5 +1,5 @@
 const lang = {
-    META_ID: () => "en-US"
+    META_IDENTIFIER: () => "en-US"
 };
 
 export default lang;
