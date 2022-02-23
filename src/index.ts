@@ -11,10 +11,10 @@ export class Localization extends Collection<LangIdentifier, LangObject> {
     public constructor(public langIdentifier: LangIdentifier) { super(); }
 
     public async load(): Promise<any> {
-        const langsFolderPath = resolve(dirname(fileURLToPath(import.meta.url)), "..", "langs");
+        const langsFolderPath = resolve(dirname(fileURLToPath(import.meta.url)), "localization");
         const langsFile = await readdir(langsFolderPath);
         for (const langFile of langsFile) {
-            const lang: LangObject = await import(resolve(langsFolderPath, langFile));
+            const { default: lang }: { default: LangObject } = await import(resolve(langsFolderPath, langFile));
             this.set(lang.META_IDENTIFIER(), lang);
         }
     }
