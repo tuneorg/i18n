@@ -1,6 +1,5 @@
 const lang = {
-    META_ID: () => "en-US",
-    RAJAT_KONTOL: () => "Rajat gay"
+    META_ID: () => "en-US"
 };
 
 export default lang;
