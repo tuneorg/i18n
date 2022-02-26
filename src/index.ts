@@ -8,7 +8,7 @@ export type LangObject = typeof enUS;
 export type LangIdentifier = ReturnType<LangObject["META_IDENTIFIER"]>;
 export class Localization extends Collection<LangIdentifier, LangObject> {
     public readonly default = enUS;
-    public constructor(public langIdentifier: LangIdentifier) { super(); }
+    public constructor(public defaultIdentifier: LangIdentifier) { super(); }
 
     public async load(): Promise<any> {
         const langsFolderPath = resolve(dirname(fileURLToPath(import.meta.url)), "localization");
@@ -19,7 +19,7 @@ export class Localization extends Collection<LangIdentifier, LangObject> {
         }
     }
 
-    public loc(language = this.langIdentifier): LangObject {
+    public loc(language = this.defaultIdentifier): LangObject {
         return this.get(language) ?? this.default;
     }
 }
